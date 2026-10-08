@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never" default-locale="ru-RU" page-range-format="expanded">
+  <info>
+    <title>ГОСТ Р 7.0.100-2018 (алфавит, сначала русскоязычные; Notes = 0/1)</title>
+    <title-short>ГОСТ Р 7.0.100-2018 рус/ин</title-short>
+    <id>http://csl.mendeley.com/styles/custom/gost-r-7-0-100-2018-ru-first</id>
+    <link href="http://csl.mendeley.com/styles/custom/gost-r-7-0-100-2018-ru-first" rel="self"/>
+    <link href="https://protect.gost.ru/document.aspx?control=7&amp;id=232846" rel="documentation"/>
+    <category citation-format="numeric"/>
+    <category field="generic-base"/>
+    <summary>Список литературы по ГОСТ Р 7.0.100-2018, ссылки в тексте [1], [1, с. 25], [1–3].
+      Сортировка: 1) по полю Notes (General notes) записи: 0 — русскоязычные, 1 — иностранные
+      (записи с пустым полем уходят в конец списка); 2) по алфавиту фамилии и инициалов первого автора
+      (при отсутствии автора — по заглавию); 3) работы автора без соавторов раньше работ с соавторами,
+      соавторские — по алфавиту второго, третьего… автора; 4) работы одного автора — по алфавиту заглавий;
+      5) по году.</summary>
+    <updated>2026-10-08T12:00:00+03:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  <locale>
+    <terms>
+      <!-- в сведениях об ответственности: первые три автора + [и др.] -->
+      <term name="et-al"> [и др.]</term>
+      <!-- в заголовке записи: только первый автор, без «и др.» -->
+      <term name="and others"></term>
+      <term name="editor">
+        <single>редактор</single>
+        <multiple>редакторы</multiple>
+      </term>
+      <term name="translator">
+        <single>переводчик</single>
+        <multiple>переводчики</multiple>
+      </term>
+    </terms>
+  </locale>
+
+  <!-- ================= ИМЕНА ================= -->
+
+  <!-- Заголовок записи: «Фамилия, И. О.» первого автора -->
+  <macro name="heading">
+    <names variable="author">
+      <name name-as-sort-order="all" sort-separator=", " initialize-with=". " delimiter=", " et-al-min="2" et-al-use-first="1"/>
+      <et-al term="and others"/>
+    </names>
+  </macro>
+
+  <!-- Сведения об ответственности после «/»: до 4 авторов — все, 5 и более — первые три [и др.] -->
+  <macro name="authors-statement">
+    <names variable="author">
+      <name initialize-with=". " delimiter=", " et-al-min="5" et-al-use-first="3" delimiter-precedes-et-al="never"/>
+      <et-al term="et-al"/>
+    </names>
+  </macro>
+
+  <macro name="editors">
+    <names variable="editor">
+      <label form="long" suffix=" "/>
+      <name initialize-with=". " delimiter=", " et-al-min="5" et-al-use-first="3" delimiter-precedes-et-al="never"/>
+      <et-al term="et-al"/>
+    </names>
+  </macro>
+
+  <macro name="translators">
+    <names variable="translator">
+      <label form="long" suffix=" "/>
+      <name initialize-with=". " delimiter=", " et-al-min="5" et-al-use-first="3" delimiter-precedes-et-al="never"/>
+      <et-al term="et-al"/>
+    </names>
+  </macro>
+
+  <!-- ================= ОБЛАСТЬ ЗАГЛАВИЯ ================= -->
+
+  <!-- Заглавие : сведения, относящиеся к заглавию / авторы ; редактор … ; переводчик … -->
+  <macro name="title-area">
+    <group delimiter=" / ">
+      <group delimiter=" : ">
+        <text variable="title"/>
+        <text variable="genre"/>
+      </group>
+      <group delimiter=" ; ">
+        <text macro="authors-statement"/>
+        <choose>
+          <if type="chapter paper-conference entry-encyclopedia entry-dictionary" match="none">
+            <text macro="editors"/>
+          </if>
+        </choose>
+        <text macro="translators"/>
+        <choose>
+          <if type="thesis">
+            <text variable="publisher"/>
+          </if>
+        </choose>
+      </group>
+    </group>
+  </macro>
+
+  <!-- Заголовок + область заглавия -->
+  <macro name="head">
+    <group delimiter=" ">
+      <text macro="heading"/>
+      <text macro="title-area"/>
+    </group>
+  </macro>
+
+  <!-- ================= ПРОЧИЕ ОБЛАСТИ ================= -->
+
+  <macro name="year">
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <macro name="full-date">
+    <date variable="issued" delimiter=".">
+      <date-part name="day" form="numeric-leading-zeros"/>
+      <date-part name="month" form="numeric-leading-zeros"/>
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <macro name="edition">
+    <choose>
+      <if is-numeric="edition">
+        <group delimiter="-">
+          <text variable="edition"/>
+          <text value="е изд."/>
+        </group>
+      </if>
+      <else>
+        <text variable="edition"/>
+      </else>
+    </choose>
+  </macro>
+
+  <!-- Место : Издательство, Год -->
+  <macro name="publication">
+    <group delimiter=", ">
+      <group delimiter=" : ">
+        <text variable="publisher-place"/>
+        <choose>
+          <if type="thesis" match="none">
+            <text variable="publisher"/>
+          </if>
+        </choose>
+      </group>
+      <text macro="year"/>
+    </group>
+  </macro>
+
+  <!-- Т. 12, № 3 -->
+  <macro name="volume-issue">
+    <group delimiter=", ">
+      <group delimiter=" ">
+        <text value="Т."/>
+        <text variable="volume"/>
+      </group>
+      <group delimiter=" ">
+        <text value="№"/>
+        <text variable="issue"/>
+      </group>
+    </group>
+  </macro>
+
+  <macro name="volume">
+    <group delimiter=" ">
+      <text value="Т."/>
+      <text variable="volume"/>
+    </group>
+  </macro>
+
+  <!-- С. 10–20 -->
+  <macro name="pages-range">
+    <group delimiter=" ">
+      <text value="С."/>
+      <text variable="page"/>
+    </group>
+  </macro>
+
+  <!-- Объём: 250 с. -->
+  <macro name="extent">
+    <choose>
+      <if variable="number-of-pages">
+        <group delimiter=" ">
+          <text variable="number-of-pages"/>
+          <text value="с."/>
+        </group>
+      </if>
+      <else-if is-numeric="page">
+        <group delimiter=" ">
+          <text variable="page"/>
+          <text value="с."/>
+        </group>
+      </else-if>
+    </choose>
+  </macro>
+
+  <!-- (Название серии ; № 5) -->
+  <macro name="series">
+    <group delimiter=" ; " prefix="(" suffix=")">
+      <text variable="collection-title"/>
+      <group delimiter=" ">
+        <text value="№"/>
+        <text variable="collection-number"/>
+      </group>
+    </group>
+  </macro>
+
+  <macro name="doi">
+    <group delimiter=" ">
+      <text value="DOI:"/>
+      <text variable="DOI"/>
+    </group>
+  </macro>
+
+  <!-- URL: … (дата обращения: 19.05.2026) -->
+  <macro name="url">
+    <group delimiter=" ">
+      <text value="URL:"/>
+      <text variable="URL"/>
+      <date variable="accessed" prefix="(дата обращения: " suffix=")" delimiter=".">
+        <date-part name="day" form="numeric-leading-zeros"/>
+        <date-part name="month" form="numeric-leading-zeros"/>
+        <date-part name="year"/>
+      </date>
+    </group>
+  </macro>
+
+  <macro name="doi-or-url">
+    <choose>
+      <if variable="DOI">
+        <text macro="doi"/>
+      </if>
+      <else>
+        <text macro="url"/>
+      </else>
+    </choose>
+  </macro>
+
+  <!-- ================= ТИПЫ ЗАПИСЕЙ ================= -->
+
+  <!-- Статья: Автор. Заглавие / Авторы // Журнал. – 2021. – Т. 1, № 2. – С. 3–4. – DOI: … -->
+  <macro name="entry-article">
+    <group delimiter=". – ">
+      <group delimiter=" // ">
+        <text macro="head"/>
+        <text variable="container-title"/>
+      </group>
+      <text macro="year"/>
+      <text macro="volume-issue"/>
+      <text macro="pages-range"/>
+      <text macro="doi"/>
+    </group>
+  </macro>
+
+  <!-- Составная часть сборника / книги / материалов конференции -->
+  <macro name="entry-part">
+    <group delimiter=". – ">
+      <group delimiter=" // ">
+        <text macro="head"/>
+        <group delimiter=" / ">
+          <text variable="container-title"/>
+          <text macro="editors"/>
+        </group>
+      </group>
+      <text macro="edition"/>
+      <text macro="publication"/>
+      <text macro="volume"/>
+      <text macro="pages-range"/>
+      <text macro="doi"/>
+    </group>
+  </macro>
+
+  <!-- Книга, отчёт, диссертация и прочие самостоятельные издания -->
+  <macro name="entry-book">
+    <group delimiter=". – ">
+      <text macro="head"/>
+      <text macro="edition"/>
+      <text macro="publication"/>
+      <text macro="volume"/>
+      <text macro="extent"/>
+      <text macro="series"/>
+      <text macro="doi"/>
+    </group>
+  </macro>
+
+  <!-- Патент / свидетельство: Патент № 123 Российская Федерация. Заглавие : опубл. 01.02.2020 / Авторы ; заявитель … – 5 с. -->
+  <macro name="patent-lead">
+    <group delimiter=" ">
+      <choose>
+        <if variable="genre">
+          <text variable="genre"/>
+        </if>
+        <else>
+          <text value="Патент"/>
+        </else>
+      </choose>
+      <group delimiter=" ">
+        <text value="№"/>
+        <text variable="number"/>
+      </group>
+      <choose>
+        <if variable="jurisdiction">
+          <text variable="jurisdiction"/>
+        </if>
+        <else>
+          <text variable="publisher-place"/>
+        </else>
+      </choose>
+    </group>
+  </macro>
+
+  <macro name="entry-patent">
+    <group delimiter=". – ">
+      <group delimiter=". ">
+        <text macro="patent-lead"/>
+        <group delimiter=" / ">
+          <group delimiter=" : ">
+            <text variable="title"/>
+            <group delimiter=" ">
+              <text value="опубл."/>
+              <text macro="full-date"/>
+            </group>
+          </group>
+          <group delimiter=" ; ">
+            <text macro="authors-statement"/>
+            <group delimiter=" ">
+              <text value="заявитель"/>
+              <text variable="publisher"/>
+            </group>
+          </group>
+        </group>
+      </group>
+      <text macro="extent"/>
+      <text macro="url"/>
+    </group>
+  </macro>
+
+  <!-- Нормативный акт: Заглавие : Указ … от 05.03.2020 № 164 // Источник. – URL: … -->
+  <macro name="entry-legislation">
+    <group delimiter=". – ">
+      <group delimiter=" // ">
+        <group delimiter=" : ">
+          <text variable="title"/>
+          <group delimiter=" ">
+            <text variable="genre"/>
+            <group delimiter=" ">
+              <text value="от"/>
+              <text macro="full-date"/>
+            </group>
+            <group delimiter=" ">
+              <text value="№"/>
+              <text variable="number"/>
+            </group>
+          </group>
+        </group>
+        <text variable="container-title"/>
+      </group>
+      <text macro="pages-range"/>
+      <text macro="url"/>
+    </group>
+  </macro>
+
+  <!-- Электронный ресурс: Заглавие / Авторы // Сайт. – 2025. – URL: … (дата обращения: …) -->
+  <macro name="entry-web">
+    <group delimiter=". – ">
+      <group delimiter=" // ">
+        <text macro="head"/>
+        <choose>
+          <if variable="container-title">
+            <text variable="container-title"/>
+          </if>
+          <else>
+            <text variable="publisher"/>
+          </else>
+        </choose>
+      </group>
+      <text macro="year"/>
+      <text macro="doi-or-url"/>
+    </group>
+  </macro>
+
+  <!-- ================= СОРТИРОВКА ================= -->
+
+  <!-- первый автор / заглавие -->
+  <macro name="sort-heading">
+    <choose>
+      <if type="patent">
+        <text macro="patent-lead"/>
+      </if>
+      <else>
+        <names variable="author">
+          <name name-as-sort-order="all" sort-separator=" " initialize-with=" " delimiter=" " et-al-min="2" et-al-use-first="1"/>
+          <et-al term="and others"/>
+          <substitute>
+            <text variable="title"/>
+          </substitute>
+        </names>
+      </else>
+    </choose>
+  </macro>
+
+  <macro name="sort-coauthors">
+    <names variable="author">
+      <name name-as-sort-order="all" sort-separator=" " initialize-with=" " delimiter=" | "/>
+    </names>
+  </macro>
+
+  <!-- ================= ССЫЛКИ В ТЕКСТЕ ================= -->
+
+  <citation collapse="citation-number">
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout prefix="[" suffix="]" delimiter=", ">
+      <group delimiter=", ">
+        <text variable="citation-number"/>
+        <group delimiter=" ">
+          <label variable="locator" form="short"/>
+          <text variable="locator"/>
+        </group>
+      </group>
+    </layout>
+  </citation>
+
+  <!-- ================= СПИСОК ЛИТЕРАТУРЫ ================= -->
+
+  <bibliography entry-spacing="0">
+    <sort>
+      <key variable="note"/>
+      <key variable="annote"/>
+      <key macro="sort-heading"/>
+      <key macro="sort-coauthors" names-min="999" names-use-first="999"/>
+      <key variable="title"/>
+      <key variable="issued"/>
+    </sort>
+    <layout suffix=".">
+      <text variable="citation-number" suffix=". "/>
+      <choose>
+        <if type="article-journal article-magazine article-newspaper review review-book" match="any">
+          <text macro="entry-article"/>
+        </if>
+        <else-if type="chapter paper-conference entry-encyclopedia entry-dictionary" match="any">
+          <text macro="entry-part"/>
+        </else-if>
+        <else-if type="patent">
+          <text macro="entry-patent"/>
+        </else-if>
+        <else-if type="legislation bill legal_case treaty" match="any">
+          <text macro="entry-legislation"/>
+        </else-if>
+        <else-if type="webpage post post-weblog dataset" match="any">
+          <text macro="entry-web"/>
+        </else-if>
+        <else-if type="article" variable="container-title" match="all">
+          <text macro="entry-article"/>
+        </else-if>
+        <else>
+          <text macro="entry-book"/>
+        </else>
+      </choose>
+    </layout>
+  </bibliography>
+</style>
