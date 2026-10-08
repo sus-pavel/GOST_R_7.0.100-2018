@@ -32,7 +32,7 @@
 1. В Word откройте вкладку References → Mendeley Cite.
 2. Перейдите в Citation Settings → Change citation style.
 3. Пролистайте вниз и нажмите Add a custom style.
-4. Вставьте ссылку на файл стиля и нажмите Update citation style.
+4. Вставьте ссылку https://raw.githubusercontent.com/sus-pavel/GOST_R_7.0.100-2018/main/GOST_R-7_0_100-2018_RU_First.csl на файл стиля и нажмите Update citation style.
 
 ## Разметка источников: 0 и 1
 
